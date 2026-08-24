@@ -1,0 +1,23 @@
+{
+  "name": "api",
+  "version": "1.0.50",
+  "module": "src/app.js",
+  "scripts": {
+    "dev": "bun run --watch src/app.ts"
+  },
+  "dependencies": {
+    "@repo/db-config": "workspace:*",
+    "@repo/env-config": "workspace:*",
+    "@sinclair/typebox": "^0.34.52",
+    "drizzle-orm": "^1.0.0-rc.4",
+    "drizzle-typebox": "^0.3.3",
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "@repo/typescript-config": "workspace:*"
+  },
+  "overrides": {
+    "@sinclair/typebox": "0.32.4"
+  }
+}

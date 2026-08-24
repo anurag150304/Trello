@@ -8,7 +8,8 @@ dotenv.config({ path: path.resolve(process.cwd(), "../.env") });
 dotenv.config({ path: path.resolve(process.cwd(), "../../.env") });
 
 const envSchema = z.object({
-    DATABASE_URL: z.url()
+    DATABASE_URL: z.url(),
+    PORT: z.number().default(8000)
 });
 
 type EnvType = z.infer<typeof envSchema>;

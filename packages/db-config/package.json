@@ -1,29 +1,22 @@
 {
   "name": "@repo/db-config",
-  "module": "index.ts",
+  "module": "src/index.ts",
   "type": "module",
   "private": true,
-  "scripts": {
-    "build": "tsc -b"
-  },
   "devDependencies": {
-    "@repo/typescript-config": "*",
+    "@repo/typescript-config": "workspace:*",
     "@types/bun": "latest",
     "@types/pg": "^8.23.1",
     "drizzle-kit": "^1.0.0-rc.4"
   },
   "dependencies": {
-    "@repo/env-config": "*",
-    "drizzle-orm": "^1.0.0-rc.4",
-    "pg": "^8.23.0"
+    "@repo/env-config": "workspace:*",
+    "drizzle-orm": "^1.0.0-rc.4"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "exports": {
-    ".": {
-      "import": "./dist/index.ts",
-      "types": "./dist/index.d.ts"
-    }
+    "./DB": "./src/index.ts"
   }
 }

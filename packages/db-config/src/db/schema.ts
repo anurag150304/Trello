@@ -9,7 +9,7 @@ export const users = pgTable("users", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     firstName: varchar("fisrtname", { length: 30 }).notNull(),
     lastName: varchar("lastname", { length: 30 }),
-    email: varchar({ length: 254 }).notNull(),
+    email: varchar({ length: 254 }).notNull().unique(),
     ...ts
 });
 

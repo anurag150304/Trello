@@ -10,7 +10,7 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "types": [
-      "bun"
+      "bun-types"
     ],
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

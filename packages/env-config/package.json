@@ -1,15 +1,13 @@
 {
   "name": "@repo/env-config",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./src/index.ts",
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "tsc",
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
+    "@repo/typescript-config": "workspace:*",
     "@types/bun": "latest",
     "@types/dotenv": "^8.2.3"
   },
@@ -21,9 +19,6 @@
     "zod": "^4.4.3"
   },
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
+    "./env": "./src/index.ts"
   }
 }
