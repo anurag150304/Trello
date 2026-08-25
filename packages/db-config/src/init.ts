@@ -1,7 +1,9 @@
 import { env } from "@repo/env-config/env";
-import { relations } from "./db/schema";
-import { drizzle } from 'drizzle-orm/bun-sql';
-import { SQL } from 'bun';
+import { relations } from "./db/schema/main-schema";
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Pool } from "pg";
 
-const client = new SQL(env.DATABASE_URL);
-export const db = drizzle({ client, relations });
+const pool = new Pool({
+    connectionString: env.DATABASE_URL,
+})
+export const db = drizzle({ client: pool, relations });

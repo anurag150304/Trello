@@ -2,6 +2,7 @@ import { Elysia } from "elysia";
 import { authRoute } from "./modules/auth";
 import { env } from "@repo/env-config/env";
 import { errHandler } from "./utils/errorHandler.util";
+import { betterAuth } from "./middlewares/auth.middleware";
 
 const app = new Elysia({
   name: "Trello API",

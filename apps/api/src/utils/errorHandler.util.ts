@@ -12,7 +12,7 @@ export class CTError extends Error {
     }
 }
 
-export const errHandler = new Elysia()
+export const errHandler = new Elysia({ name: "error-handler" })
     .error({ CTError })
     .onError(({ code, error }) => {
 
