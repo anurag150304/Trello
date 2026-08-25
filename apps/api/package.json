@@ -1,9 +1,12 @@
 {
   "name": "api",
   "version": "1.0.50",
-  "module": "src/app.js",
+  "module": "src/app.ts",
   "scripts": {
-    "dev": "bun run --watch src/app.ts"
+    "dev": "bun run --hot src/app.ts",
+    "start": "NODE_ENV=production bun run src/app.ts",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint --max-warnings 0"
   },
   "dependencies": {
     "@repo/db-config": "workspace:*",
@@ -14,8 +17,10 @@
     "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest",
-    "@repo/typescript-config": "workspace:*"
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/bun": "^1.4.0",
+    "eslint": "^10.9.1"
   },
   "overrides": {
     "@sinclair/typebox": "0.32.4"
