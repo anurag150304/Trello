@@ -6,7 +6,7 @@ import { betterAuth } from "@/middlewares/auth.middleware";
 
 export const authRoute = new Elysia({ prefix: "/auth" })
     .use(betterAuth)
-    .post("/sign-up", async ({ body, user }) => {
+    .post("/sign-up", async ({ body, user, session }) => {
         const alreadyEsists = await AuthService.findUser(body.email);
         if (alreadyEsists) throw new CTError(409, "email already taken!");
 

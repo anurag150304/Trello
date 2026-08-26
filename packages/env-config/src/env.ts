@@ -10,7 +10,9 @@ dotenv.config({ path: path.resolve(process.cwd(), "../../.env") });
 const envSchema = z.object({
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
     DATABASE_URL: z.url(),
-    PORT: z.coerce.number().default(8000)
+    PORT: z.coerce.number().default(8000),
+    RESEND_API_KEY: z.string(),
+    RESEND_FROM_EMAIL: z.email(),
 });
 
 type EnvType = z.infer<typeof envSchema>;

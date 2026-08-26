@@ -1,7 +1,8 @@
 export * from "./init";
-import { users, orgs, departs, groups, members } from "./db/schema/main-schema";
+import { orgs, departs, groups, members } from "./db/schema/main-schema";
+import { user } from "./db/schema/auth-schema";
 export const models = {
-    users,
+    user,
     orgs,
     departs,
     groups,

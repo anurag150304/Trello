@@ -9,9 +9,9 @@
     "lint": "eslint --max-warnings 0"
   },
   "dependencies": {
+    "@repo/auth-config": "workspace:*",
     "@repo/db-config": "workspace:*",
     "@repo/env-config": "workspace:*",
-    "@repo/auth-config": "workspace:*",
     "@sinclair/typebox": "^0.34.52",
     "drizzle-orm": "^1.0.0-rc.4",
     "drizzle-typebox": "^0.3.3",

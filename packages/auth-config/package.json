@@ -6,7 +6,8 @@
   "dependencies": {
     "@repo/db-config": "workspace:*",
     "@repo/env-config": "workspace:*",
-    "better-auth": "^1.7.1"
+    "better-auth": "^1.7.1",
+    "resend": "^6.24.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
