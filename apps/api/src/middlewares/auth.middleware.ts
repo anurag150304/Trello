@@ -10,7 +10,10 @@ export const betterAuth = new Elysia({ name: "better-auth" })
                     headers,
                 });
 
-                if (!session) return status(401);
+                if (!session) return status("Unauthorized", {
+                    error: "Unauthrized access!",
+                    session: null
+                });
 
                 return {
                     user: session.user,

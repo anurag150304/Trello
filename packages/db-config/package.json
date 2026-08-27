@@ -16,7 +16,8 @@
     "drizzle-kit": "^1.0.0-rc.4"
   },
   "exports": {
-    "./DB": "./src/index.ts"
+    "./DB": "./src/db.ts",
+    "./models": "./src/models.ts"
   },
   "private": true,
   "type": "module"

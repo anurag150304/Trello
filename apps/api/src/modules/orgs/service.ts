@@ -1,6 +1,7 @@
-import { db, models } from "@repo/db-config/DB";
-import { eq, or, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
+import { db } from "@repo/db-config/DB";
 import type { orgsSchema } from "./model";
+import { models } from "@repo/db-config/models";
 import { CTError } from "@/utils/errorHandler.util";
 
 export class OrgService {
@@ -21,5 +22,23 @@ export class OrgService {
         return await db.insert(models.orgs).values({
             name, ...(website && { website }), createdBy
         }).returning({ orgId: models.orgs.id });
+    }
+
+    static async getUserOrgs({ userId }: { userId: string }) {
+        return await db.query.orgs.findMany({
+            columns: { createdBy: false },
+            where: { createdBy: userId }
+        });
+    }
+
+    static async getOrgInfo({ orgId }: { orgId: number }) {
+        const org = await db.query.orgs.findFirst({
+            columns: { createdBy: false },
+            where: { id: orgId },
+            with: { departs: true }
+        });
+
+        if (!org) throw new CTError(404, "Organisation not found!");
+        return org;
     }
 }

@@ -1,4 +1,4 @@
-import { Elysia, status } from "elysia";
+import { Elysia } from "elysia";
 
 export class CTError extends Error {
     status: number;
@@ -14,10 +14,31 @@ export class CTError extends Error {
 
 export const errHandler = new Elysia({ name: "error-handler" })
     .error({ CTError })
-    .onError(({ code, error }) => {
+    .onError(({ code, error, status }) => {
+        if (code === "CTError") {
+            return status(error.status, {
+                error: error.message
+            });
+        }
 
-        return code === "UNKNOWN" ?
-            status("Bad Request", { error: "An error occured..." }) :
-            error;
+        if (code === "VALIDATION") {
+            return status("Unprocessable Content", {
+                error: "Validation failed",
+                message: error.message
+            });
+        }
 
-    }).as("global")
+        if (code === "NOT_FOUND") {
+            return status("Not Found", {
+                error: "Resource not found",
+                message: "The requested resource could not be found."
+            });
+        }
+
+        console.error("Server Error:", error);
+
+        return status("Bad Request", {
+            error: "Something went wrong!",
+            message: "Please try again later!"
+        });
+    }).as("global");

@@ -1,6 +1,6 @@
 import { t, type UnwrapSchema } from "elysia";
-import { models, db } from "@repo/db-config/DB";
-import { createInsertSchema } from "drizzle-typebox";
+import { models } from "@repo/db-config/models";
+import { createInsertSchema } from "drizzle-orm/typebox-legacy";
 
 const _createOrg = createInsertSchema(models.orgs, {
     name: t.String(),
@@ -9,7 +9,8 @@ const _createOrg = createInsertSchema(models.orgs, {
 });
 
 export const orgsSchema = {
-    createSchema: t.Omit(_createOrg, ["id", "createdAt"])
+    createSchema: t.Omit(_createOrg, ["id", "createdAt"]),
+    paramSchema: t.Object({ orgId: t.Number() })
 }
 
 export type orgsSchema = {

@@ -6,7 +6,7 @@
     "dev": "bun run --hot src/app.ts",
     "start": "NODE_ENV=production bun run src/app.ts",
     "check-types": "tsc --noEmit",
-    "lint": "eslint --max-warnings 0"
+    "lint": "eslint"
   },
   "dependencies": {
     "@repo/auth-config": "workspace:*",
@@ -14,7 +14,6 @@
     "@repo/env-config": "workspace:*",
     "@sinclair/typebox": "^0.34.52",
     "drizzle-orm": "^1.0.0-rc.4",
-    "drizzle-typebox": "^0.3.3",
     "elysia": "latest"
   },
   "devDependencies": {

@@ -25,7 +25,7 @@ const loadEnv = (): EnvType => {
     const { data, success, error } = parsedEnv;
     if (!success) {
         const errors = Object.keys(error.flatten().fieldErrors);
-        console.error("Invalid or Missing Environment Variables: ", JSON.stringify(errors, null, 2));
+        console.error("Check these Environment Variables: ", JSON.stringify(errors, null, 2));
         process.exit(1);
     }
     cachedEnv = data;
