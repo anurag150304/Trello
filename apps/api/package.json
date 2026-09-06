@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@elysia/cors": "^1.4.2",
     "@repo/auth-config": "workspace:*",
     "@repo/db-config": "workspace:*",
     "@repo/env-config": "workspace:*",
@@ -20,7 +21,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/bun": "^1.4.0",
-    "eslint": "^10.9.1"
+    "eslint": "^10.10.0"
   },
   "overrides": {
     "@sinclair/typebox": "0.32.4"

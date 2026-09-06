@@ -1,8 +1,10 @@
 {
   "name": "@repo/db-config",
-  "module": "src/index.ts",
+  "main": "src/index.ts",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "bun run --watch src"
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@repo/env-config": "workspace:*",
@@ -18,7 +20,5 @@
   "exports": {
     "./DB": "./src/db.ts",
     "./models": "./src/models.ts"
-  },
-  "private": true,
-  "type": "module"
+  }
 }

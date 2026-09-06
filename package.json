@@ -1,26 +1,26 @@
 {
   "name": "trello",
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
-  },
   "devDependencies": {
     "prettier": "^3.7.4",
     "turbo": "^2.10.11",
-    "typescript": "^6"
-  },
-  "engines": {
-    "node": ">=18"
+    "typescript": "^7.0.2"
   },
   "devEngines": {
     "packageManager": {
       "name": "bun",
       "version": "1.4.0"
     }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
   },
   "workspaces": [
     "apps/*",

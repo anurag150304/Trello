@@ -4,8 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check-types": "tsc --noEmit",
-    "dev": "bun run --watch src"
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "dotenv": "^17.4.2",

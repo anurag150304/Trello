@@ -1,24 +1,25 @@
 import { Elysia } from "elysia";
-import { auth } from "@repo/auth-config";
+import { auth } from "@repo/auth-config/api";
 
 export const betterAuth = new Elysia({ name: "better-auth" })
-    .mount(auth.handler)
-    .macro({
-        auth: {
-            async resolve({ status, request: { headers } }) {
-                const session = await auth.api.getSession({
-                    headers,
-                });
+  .mount(auth.handler)
+  .macro({
+    auth: {
+      async resolve({ status, request: { headers } }) {
+        const session = await auth.api.getSession({
+          headers,
+        });
 
-                if (!session) return status("Unauthorized", {
-                    error: "Unauthrized access!",
-                    session: null
-                });
+        if (!session)
+          return status("Unauthorized", {
+            error: "Unauthorized access!",
+            session: null,
+          });
 
-                return {
-                    user: session.user,
-                    session: session.session,
-                };
-            },
-        },
-    });
+        return {
+          user: session.user,
+          session: session.session,
+        };
+      },
+    },
+  });

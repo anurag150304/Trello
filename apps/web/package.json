@@ -11,7 +11,9 @@
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@repo/auth-config": "workspace:*",
     "@repo/db-config": "workspace:*",
+    "better-auth": "^1.7.3",
     "next": "16.3.2",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -23,7 +25,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^10.9.1",
+    "eslint": "^10.10.0",
     "tailwindcss": "^4"
   },
   "ignoreScripts": [
