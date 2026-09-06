@@ -9,8 +9,8 @@ interface SendEmailOptions {
   html: string;
 }
 
-export function sendEmail({ to, subject, html }: SendEmailOptions) {
-  const res = resend.emails.send({
+export async function sendEmail({ to, subject, html }: SendEmailOptions) {
+  const res = await resend.emails.send({
     from: env.RESEND_FROM_EMAIL,
     to,
     subject,
