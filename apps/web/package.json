@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --port 3000 --turbopack",
+    "dev": "next dev --port 3000",
     "build": "next build",
     "start": "next start --port 3000",
     "lint": "eslint",
@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@repo/auth-config": "workspace:*",
-    "@repo/db-config": "workspace:*",
     "better-auth": "^1.7.3",
     "next": "16.3.2",
     "react": "19.2.8",

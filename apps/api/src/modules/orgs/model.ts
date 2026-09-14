@@ -1,6 +1,6 @@
 import { t, type UnwrapSchema } from "elysia";
-import { models } from "@repo/db-config/models";
-import { createInsertSchema } from "drizzle-orm/typebox-legacy";
+import models from "@repo/db-config";
+import { createInsertSchema } from "@repo/db-config";
 
 const _createOrg = createInsertSchema(models.orgs, {
   name: t.String(),

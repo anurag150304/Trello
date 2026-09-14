@@ -1,7 +1,6 @@
 import { orgsSchema } from "./model";
 import { OrgService } from "./service";
 import { Elysia } from "elysia";
-import { CTError } from "@/utils/errorHandler.util";
 import { betterAuth } from "@/middlewares/auth.middleware";
 
 export const orgRoute = new Elysia({ prefix: "/orgs" })
@@ -9,9 +8,6 @@ export const orgRoute = new Elysia({ prefix: "/orgs" })
   .post(
     "/create",
     async ({ body, session, status }) => {
-      const alreadyExists = await OrgService.findOrg({ name: body.name });
-      if (alreadyExists)
-        throw new CTError(409, "Org already taken by someone!");
 
       const newOrg = await OrgService.createOrg({
         ...body,
@@ -19,7 +15,7 @@ export const orgRoute = new Elysia({ prefix: "/orgs" })
       });
       return status("Created", {
         message: "Org created sucessfully",
-        orgId: newOrg[0]?.orgId,
+        orgId: newOrg?.orgId,
       });
     },
     {
@@ -45,5 +41,6 @@ export const orgRoute = new Elysia({ prefix: "/orgs" })
     },
     {
       params: orgsSchema.paramSchema,
+      auth: true
     },
   );

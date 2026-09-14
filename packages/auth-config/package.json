@@ -20,5 +20,8 @@
   "exports": {
     "./api": "./src/auth.ts",
     "./client": "./src/client.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
   }
 }

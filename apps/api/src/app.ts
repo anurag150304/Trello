@@ -1,9 +1,8 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysia/cors";
-// import { authRoute } from "./modules/auth";
-import { env } from "@repo/env-config/env";
-import { errHandler } from "./utils/errorHandler.util";
 import { orgRoute } from "./modules/orgs";
+import { env } from "@repo/env-config/env";
+import { errHandler } from "./middlewares/errorHandler.middleware";
 import { authHandler } from "./utils/authHandler.util";
 
 const app = new Elysia({
@@ -19,7 +18,7 @@ const app = new Elysia({
     }),
   )
   .use(errHandler)
-  // .use(authRoute)
+  .all("/auth/*", authHandler)
   .use(orgRoute)
 
   .all("/", ({ status }) =>
@@ -28,7 +27,6 @@ const app = new Elysia({
       version: "v1",
     }),
   )
-  .all("/auth/*", authHandler)
   .listen(env.PORT, ({ hostname, port }) => {
     console.log(`Primary server is running at ${hostname}:${port}`);
   });

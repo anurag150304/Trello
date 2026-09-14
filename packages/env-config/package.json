@@ -17,5 +17,8 @@
   },
   "exports": {
     "./env": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
   }
 }

@@ -1,24 +1,10 @@
-import { sql } from "drizzle-orm";
-import { db } from "@repo/db-config/DB";
+import { DrizzleQueryError } from "drizzle-orm";
+import { db } from "@repo/db-config";
 import type { orgsSchema } from "./model";
-import { models } from "@repo/db-config/models";
-import { CTError } from "@/utils/errorHandler.util";
+import models from "@repo/db-config";
+import { CTError } from "@/middlewares/errorHandler.middleware";
 
 export class OrgService {
-  static async findOrg({ id, name }: { id?: string; name?: string }) {
-    const command: string = id
-      ? `${models.orgs.id} = ${id}`
-      : `${models.orgs.name} = ${name}`;
-
-    return await db
-      .select({
-        name: models.orgs.name,
-        website: models.orgs.website,
-      })
-      .from(models.orgs)
-      .where(sql`${command}`)
-      .limit(1);
-  }
 
   static async createOrg({
     name,
@@ -27,21 +13,35 @@ export class OrgService {
   }: orgsSchema["createSchema"]) {
     if (!createdBy) throw new CTError(422, "Org creator id is missing!");
 
-    return await db
-      .insert(models.orgs)
-      .values({
+    try {
+      const [org] = await db.insert(models.orgs).values({
         name,
         ...(website && { website }),
         createdBy,
       })
-      .returning({ orgId: models.orgs.id });
+        .returning({ orgId: models.orgs.id });
+
+      return org;
+    } catch (err) {
+      if (err instanceof DrizzleQueryError &&
+        err.cause &&
+        "code" in err.cause &&
+        err.cause.code === "23505"
+      ) {
+        throw new CTError(409, "Organization already taken by someone-else!");
+      } else {
+        throw err;
+      }
+
+    }
   }
 
   static async getUserOrgs({ userId }: { userId: string }) {
-    return await db.query.orgs.findMany({
+    const orgs = await db.query.orgs.findMany({
       columns: { createdBy: false },
       where: { createdBy: userId },
     });
+    return orgs;
   }
 
   static async getOrgInfo({ orgId }: { orgId: number }) {

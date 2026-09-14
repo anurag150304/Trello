@@ -15,6 +15,10 @@ const envSchema = z.object({
 
   BETTER_AUTH_URL: z.url(),
   BETTER_AUTH_SECRET: z.string(),
+  BETTER_AUTH_ACCEPT_METHODS: z.string()
+    .transform((val) => val.split(",")
+      .map(method => method.trim().toUpperCase()))
+    .default(["POST", "GET"]),
 
   RESEND_API_KEY: z.string(),
   RESEND_FROM_EMAIL: z.email(),
@@ -30,6 +34,7 @@ const loadEnv = (): EnvType => {
 
   const parsedEnv = envSchema.safeParse(process.env);
   const { data, success, error } = parsedEnv;
+
   if (!success) {
     const errors = Object.keys(error.flatten().fieldErrors);
     console.error(
@@ -38,6 +43,7 @@ const loadEnv = (): EnvType => {
     );
     process.exit(1);
   }
+
   cachedEnv = data;
   return cachedEnv;
 };
