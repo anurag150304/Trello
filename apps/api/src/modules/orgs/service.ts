@@ -5,7 +5,6 @@ import models from "@repo/db-config";
 import { CTError } from "@/middlewares/errorHandler.middleware";
 
 export class OrgService {
-
   static async createOrg({
     name,
     website,
@@ -14,16 +13,19 @@ export class OrgService {
     if (!createdBy) throw new CTError(422, "Org creator id is missing!");
 
     try {
-      const [org] = await db.insert(models.orgs).values({
-        name,
-        ...(website && { website }),
-        createdBy,
-      })
+      const [org] = await db
+        .insert(models.orgs)
+        .values({
+          name,
+          ...(website && { website }),
+          createdBy,
+        })
         .returning({ orgId: models.orgs.id });
 
       return org;
     } catch (err) {
-      if (err instanceof DrizzleQueryError &&
+      if (
+        err instanceof DrizzleQueryError &&
         err.cause &&
         "code" in err.cause &&
         err.cause.code === "23505"
@@ -32,7 +34,6 @@ export class OrgService {
       } else {
         throw err;
       }
-
     }
   }
 

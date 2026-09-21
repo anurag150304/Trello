@@ -1,14 +1,15 @@
 import { db } from "@repo/db-config";
-import models from "@repo/db-config"
+import models from "@repo/db-config";
 import { betterAuth } from "better-auth/minimal";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { env } from "@repo/env-config/env";
 
 export const auth = betterAuth({
-
-  baseURL: env.NODE_ENV === "production" ? env.API_URL : "http://localhost:8000",
+  baseURL:
+    env.NODE_ENV === "production" ? env.API_URL : "http://localhost:8000",
   basePath: "/api/v1/auth",
-  trustedOrigins: env.NODE_ENV === "production" ? [env.WEB_URL!] : ["http://localhost:3000"],
+  trustedOrigins:
+    env.NODE_ENV === "production" ? [env.WEB_URL!] : ["http://localhost:3000"],
 
   // DB init
   database: drizzleAdapter(db, {
@@ -17,8 +18,8 @@ export const auth = betterAuth({
       user: models.user,
       session: models.session,
       account: models.account,
-      verification: models.verification
-    }
+      verification: models.verification,
+    },
   }),
 
   // Auth Providers

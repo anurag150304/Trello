@@ -8,7 +8,6 @@ export const orgRoute = new Elysia({ prefix: "/orgs" })
   .post(
     "/create",
     async ({ body, session, status }) => {
-
       const newOrg = await OrgService.createOrg({
         ...body,
         createdBy: session.userId,
@@ -41,6 +40,6 @@ export const orgRoute = new Elysia({ prefix: "/orgs" })
     },
     {
       params: orgsSchema.paramSchema,
-      auth: true
+      auth: true,
     },
   );

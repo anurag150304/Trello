@@ -19,9 +19,10 @@ export async function sendEmail({ to, subject, html }: SendEmailOptions) {
 
   // return res;
   if (!res.data || res.error) {
-    throw new Error(`Failed to send email: ${res.error?.message || 'Unknown error'}`);
+    throw new Error(
+      `Failed to send email: ${res.error?.message || "Unknown error"}`,
+    );
   }
 
   return res.data;
-
 }

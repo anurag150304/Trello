@@ -11,7 +11,8 @@ const app = new Elysia({
 })
   .use(
     cors({
-      origin: env.NODE_ENV === "production" ? env.WEB_URL : "http://localhost:3000",
+      origin:
+        env.NODE_ENV === "production" ? env.WEB_URL : "http://localhost:3000",
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
       credentials: true,
       allowedHeaders: "Content-Type",
