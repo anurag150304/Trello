@@ -3,7 +3,7 @@ import { cors } from "@elysia/cors";
 import { orgRoute } from "./modules/orgs";
 import { env } from "@repo/env-config/env";
 import { errHandler } from "./middlewares/errorHandler.middleware";
-import { authHandler } from "./utils/authHandler.util";
+import { auth } from "@repo/auth-config/api";
 
 const app = new Elysia({
   name: "Trello API",
@@ -11,15 +11,13 @@ const app = new Elysia({
 })
   .use(
     cors({
-      origin: "http://localhost:3000",
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      origin: env.NODE_ENV === "production" ? env.WEB_URL : "http://localhost:3000",
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
       credentials: true,
-      allowedHeaders: ["Content-Type", "Authorization"],
+      allowedHeaders: "Content-Type",
     }),
   )
   .use(errHandler)
-  .all("/auth/*", authHandler)
-  .use(orgRoute)
 
   .all("/", ({ status }) =>
     status("OK", {
@@ -27,7 +25,21 @@ const app = new Elysia({
       version: "v1",
     }),
   )
-  .listen(env.PORT, ({ hostname, port }) => {
+  .all("/auth/*", async ({ request, status }) => {
+    if (!env.BETTER_AUTH_ACCEPT_METHODS.includes(request.method)) {
+      return status("Method Not Allowed", {
+        error: "Method Not Allowed!",
+        message: `The requested "${request.method.toUpperCase()}" method is not allowed!`,
+      });
+    }
+
+    const res = await auth.handler(request);
+    return res;
+  })
+
+  .use(orgRoute)
+
+  .listen(env.PORT || 8000, ({ hostname, port }) => {
     console.log(`Primary server is running at ${hostname}:${port}`);
   });
 

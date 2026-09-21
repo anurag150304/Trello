@@ -49,8 +49,7 @@ export class DepartService {
 
     static async getDepartInfo({ departId }: { departId: string }) {
         const info = await db.query.departs.findFirst({
-            where: { id: departId },
-            with: { teams: true },
+            where: { id: departId }
         });
 
         if (!info) throw new CTError(404, "Department not found!");

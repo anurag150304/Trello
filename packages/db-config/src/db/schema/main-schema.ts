@@ -30,15 +30,7 @@ export const departs = pgTable("departments", {
     .references(() => orgs.id, { onDelete: "restrict" }),
 });
 
-export const teams = pgTable("teams", {
-  id: uuid().primaryKey().defaultRandom(),
-  name: text("name").notNull().unique(),
-  departId: uuid("depart_id")
-    .notNull()
-    .references(() => departs.id, { onDelete: "restrict" }),
-});
-
-export const roleEnum = pgEnum("role", ["ADMIN", "TL", "MEMBER"]);
+export const roleEnum = pgEnum("role", ["ADMIN", "MEMBER"]);
 export const members = pgTable("members", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   userId: text("user_id")
@@ -48,9 +40,6 @@ export const members = pgTable("members", {
     .notNull()
     .references(() => orgs.id, { onDelete: "restrict" }),
   departId: uuid("depart_id").references(() => departs.id, {
-    onDelete: "restrict",
-  }),
-  groupId: uuid("group_id").references(() => teams.id, {
     onDelete: "restrict",
   }),
   role: roleEnum().notNull(),

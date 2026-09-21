@@ -1,4 +1,4 @@
-import { DrizzleQueryError } from "drizzle-orm";
+import { DrizzleQueryError } from "@repo/db-config";
 import { db } from "@repo/db-config";
 import type { orgsSchema } from "./model";
 import models from "@repo/db-config";

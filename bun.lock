@@ -26,6 +26,9 @@
         "@types/bun": "^1.4.0",
         "eslint": "^10.10.0",
       },
+      "peerDependencies": {
+        "typescript": "^7",
+      },
     },
     "apps/web": {
       "name": "web",
@@ -61,6 +64,9 @@
         "@repo/typescript-config": "workspace:*",
         "@types/bun": "latest",
       },
+      "peerDependencies": {
+        "typescript": "^7",
+      },
     },
     "packages/db-config": {
       "name": "@repo/db-config",
@@ -75,6 +81,9 @@
         "@types/pg": "^8.23.1",
         "drizzle-kit": "^1.0.0-rc.4",
       },
+      "peerDependencies": {
+        "typescript": "^7",
+      },
     },
     "packages/env-config": {
       "name": "@repo/env-config",
@@ -86,6 +95,9 @@
         "@repo/typescript-config": "workspace:*",
         "@types/bun": "latest",
         "@types/dotenv": "^8.2.3",
+      },
+      "peerDependencies": {
+        "typescript": "^7",
       },
     },
     "packages/eslint-config": {

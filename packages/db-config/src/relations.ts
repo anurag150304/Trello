@@ -1,6 +1,6 @@
 import { defineRelations } from "drizzle-orm";
 import { account, session, user } from "./db/schema/auth-schema";
-import { departs, teams, members, orgs } from "./db/schema/main-schema";
+import { departs, members, orgs } from "./db/schema/main-schema";
 
 export const relations = defineRelations(
   {
@@ -9,7 +9,6 @@ export const relations = defineRelations(
     account,
     orgs,
     departs,
-    teams,
     members,
   },
   (r) => ({
@@ -48,15 +47,6 @@ export const relations = defineRelations(
         from: r.departs.orgId,
         to: r.orgs.id,
       }),
-      teams: r.many.teams(),
-      members: r.many.members(),
-    },
-
-    teams: {
-      depart: r.one.departs({
-        from: r.teams.departId,
-        to: r.departs.id,
-      }),
       members: r.many.members(),
     },
 
@@ -72,10 +62,6 @@ export const relations = defineRelations(
       depart: r.one.departs({
         from: r.members.departId,
         to: r.departs.id,
-      }),
-      group: r.one.teams({
-        from: r.members.groupId,
-        to: r.teams.id,
       }),
     },
   }),
